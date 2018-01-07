@@ -4,3 +4,6 @@ AllCops:
   Exclude: 
     - 'Gemfile'
     - 'vendor/**/*'
+
+AsciiComments:
+  Enabled: false
