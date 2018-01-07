@@ -19,7 +19,7 @@ class RequestForGoogleHome
     @req.set_form_data(text: message)
 
     p message
-#    @http.request(@req)
+    @http.request(@req)
   end
 end
 
@@ -35,10 +35,9 @@ continue_num = array.size
 copy_array = Marshal.load(Marshal.dump(array))
 
 array.each do |_|
-  binding.pry
+  binding.pry # rubocop:disable all
   p copy_array
   presenter = copy_array.sample
   google_home.request(presenter)
   copy_array.delete(presenter)
 end
-
