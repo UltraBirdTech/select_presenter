@@ -1,6 +1,7 @@
 require 'pry'
 require 'net/https'
 
+# Google Homeにリクエストを送るクラス
 class RequestForGoogleHome
   attr_reader :req, :http
   def initialize(uri)
@@ -15,27 +16,29 @@ class RequestForGoogleHome
 
   def request(presenter)
     message = "Next Presenter is #{presenter}"
-    @req.set_form_data({ text: message })
+    @req.set_form_data(text: message)
 
-    p message 
-    res = @http.request(@req)
+    p message
+#    @http.request(@req)
   end
 end
 
-arr = %w(presenter_1 presenter_2 presenter_3)
+array = %w[presenter_1 presenter_2 presenter_3]
 
 domain = '6162e57d.ngrok.io'
 post_address = "https://#{domain}/google-home-notifier"
 
 google_home = RequestForGoogleHome.new(URI.parse(post_address))
 
-continue_num = arr.size
+continue_num = array.size
 
-for num in 0...continue_num
+copy_array = Marshal.load(Marshal.dump(array))
+
+array.each do |_|
   binding.pry
-  p arr
-  presenter = arr.sample
+  p copy_array
+  presenter = copy_array.sample
   google_home.request(presenter)
-  arr.delete(presenter)
+  copy_array.delete(presenter)
 end
 
