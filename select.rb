@@ -6,7 +6,7 @@ class RequestForGoogleHome
   attr_reader :req, :http
   def initialize(uri)
     @http = initialize_http(uri) 
-    @req = Net::HTTP::Post.new(uri.path)
+    @req  = generate_request(uri)
   end
 
   def request(presenter)
@@ -25,6 +25,10 @@ class RequestForGoogleHome
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
     http
+  end
+  
+  def generate_request(uri)
+    Net::HTTP::Post.new(uri.path)
   end
 end
 
