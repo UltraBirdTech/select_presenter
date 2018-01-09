@@ -5,12 +5,7 @@ require 'net/https'
 class RequestForGoogleHome
   attr_reader :req, :http
   def initialize(uri)
-    http = Net::HTTP.new(uri.host, uri.port)
-
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-    @http = http
+    @http = initialize_http(uri) 
     @req = Net::HTTP::Post.new(uri.path)
   end
 
@@ -20,6 +15,16 @@ class RequestForGoogleHome
 
     p message
     @http.request(@req)
+  end
+
+  private
+
+  def initialize_http(uri)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    http
   end
 end
 
