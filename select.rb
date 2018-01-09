@@ -5,7 +5,7 @@ require 'net/https'
 class RequestForGoogleHome
   attr_reader :req, :http
   def initialize(uri)
-    @http = initialize_http(uri) 
+    @http = initialize_http(uri)
     @req  = generate_request(uri)
   end
 
@@ -26,7 +26,7 @@ class RequestForGoogleHome
 
     http
   end
-  
+
   def generate_request(uri)
     Net::HTTP::Post.new(uri.path)
   end
