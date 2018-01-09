@@ -32,13 +32,12 @@ class RequestForGoogleHome
   end
 end
 
-array = %w[presenter_1 presenter_2 presenter_3]
-
-domain = '6162e57d.ngrok.io'
+uniq_chars   = '6162e57d'
+domain       = "{uniq_chars}.ngrok.io"
 post_address = "https://#{domain}/google-home-notifier"
+google_home  = RequestForGoogleHome.new(URI.parse(post_address))
 
-google_home = RequestForGoogleHome.new(URI.parse(post_address))
-
+array = %w[presenter_1 presenter_2 presenter_3]
 copy_array = Marshal.load(Marshal.dump(array))
 
 array.each do |_|
