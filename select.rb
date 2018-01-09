@@ -30,8 +30,6 @@ post_address = "https://#{domain}/google-home-notifier"
 
 google_home = RequestForGoogleHome.new(URI.parse(post_address))
 
-continue_num = array.size
-
 copy_array = Marshal.load(Marshal.dump(array))
 
 array.each do |_|
