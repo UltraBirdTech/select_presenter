@@ -4,7 +4,8 @@ require 'net/https'
 # Google Homeにリクエストを送るクラス
 class RequestForGoogleHome
   attr_reader :req, :http
-  def initialize(uri)
+  def initialize()
+    uri = URI.parse(generateURL())
     @http = initialize_http(uri)
     @req  = generate_request(uri)
   end
@@ -18,6 +19,17 @@ class RequestForGoogleHome
   end
 
   private
+  def getUniqID()
+    '6162e57d'
+  end
+
+  def generateDomain()
+   "#{getUniqID()}.ngrok.io"
+  end
+
+  def generateURL()
+   "https://#{generateDomain()}/google-home-notifier"
+  end
 
   def initialize_http(uri)
     http = Net::HTTP.new(uri.host, uri.port)
@@ -32,10 +44,7 @@ class RequestForGoogleHome
   end
 end
 
-uniq_chars   = '6162e57d'
-domain       = "#{uniq_chars}.ngrok.io"
-post_address = "https://#{domain}/google-home-notifier"
-google_home  = RequestForGoogleHome.new(URI.parse(post_address))
+google_home  = RequestForGoogleHome.new()
 
 array = %w[presenter_1 presenter_2 presenter_3]
 copy_array = Marshal.load(Marshal.dump(array))
