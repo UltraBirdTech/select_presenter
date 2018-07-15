@@ -33,7 +33,7 @@ class RequestForGoogleHome
 end
 
 uniq_chars   = '6162e57d'
-domain       = "{uniq_chars}.ngrok.io"
+domain       = "#{uniq_chars}.ngrok.io"
 post_address = "https://#{domain}/google-home-notifier"
 google_home  = RequestForGoogleHome.new(URI.parse(post_address))
 
