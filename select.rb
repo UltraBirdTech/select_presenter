@@ -20,7 +20,7 @@ class RequestForGoogleHome
 
   private
   def getUniqID()
-    '3eb44d1c' // ここの文字列を変更する必要がある。
+    '3eb44d1c' # ここの文字列を変更する必要がある。
   end
 
   def generateDomain()
